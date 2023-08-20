@@ -12,6 +12,7 @@ from ..models import Message, Property
 from .hateSpeechlViews import validateHateSpeech
 from .hateSpeechlViewsSightEngine import  validateHateSpeechSight
 
+from .emailViews import verifyIfEmailToSendToClaimer
 
 class MessagesView(APIView):
     def get(self, request, number):
@@ -51,6 +52,7 @@ class MessageView(APIView):
             else:
                 newMessage.save()
             updatedSerializer = MessageSerializer(newMessage)
+            verifyIfEmailToSendToClaimer(newMessage.property.id, newMessage.property.number)
             return Response(updatedSerializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
