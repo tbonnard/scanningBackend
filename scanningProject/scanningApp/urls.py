@@ -12,4 +12,5 @@ urlpatterns = [
     path('message/', messageViews.MessageView.as_view()),
     path('message/<int:pk>/', messageViews.MessageDetailsView.as_view()),
     path('claim/', claimViews.ClaimView.as_view()),
+    path('claim/<int:pk>/', claimViews.ClaimDetailsView.as_view()),
 ]
